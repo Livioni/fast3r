@@ -1,4 +1,10 @@
 logs
+source
+output
+outputs
+demo_outputs
+gradio_tmp_dir
+temp_preview_frames
 
 notebooks/figures/
 notebooks/output/
@@ -33,6 +39,7 @@ share/python-wheels/
 .installed.cfg
 *.egg
 MANIFEST
+.gradio
 
 # PyInstaller
 #  Usually these files are written by a python script from a template
@@ -135,13 +142,13 @@ dmypy.json
 .pyre/
 
 ### VisualStudioCode
-.vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
-*.code-workspace
-**/.vscode
+# .vscode/*
+# !.vscode/settings.json
+# !.vscode/tasks.json
+# !.vscode/launch.json
+# !.vscode/extensions.json
+# *.code-workspace
+# **/.vscode
 
 # JetBrains
 .idea/
