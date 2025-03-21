@@ -8,6 +8,7 @@ import numpy as np
 import torch
 from scipy.spatial.transform import Rotation as R
 from tqdm import tqdm
+from tools.misc import pose_unreal2opencv
 
 from database import COLMAPDatabase
 
@@ -16,29 +17,6 @@ RDF_TO_DRB = torch.Tensor([[0, 1, 0],
                            [1, 0, 0],
                            [0, 0, -1]])
 
-def pose_unreal2opencv(c2w_mat):
-    translation = c2w_mat[:3, 3]
-    rot = R.from_matrix(c2w_mat[:3, :3])
-    rot_vec = rot.as_rotvec()
-
-    rot_vec_new = rot_vec[[1, 2, 0]]
-    rot_vec_new[0] *= -1
-    rot_vec_new[2] *= -1
-
-    rot = R.from_rotvec(rot_vec_new)
-    
-    translation_new = translation[[1, 2, 0]]
-    translation_new[1] *= -1
-
-    c2w_mat = np.eye(4)
-    c2w_mat[:3, :3] = rot.as_matrix()
-    c2w_mat[:3, 3] = translation_new
-
-    rot = np.eye(4)
-    rot[1,1]=-1
-    rot[2, 2] = -1
-    c2w_mat =  rot @ c2w_mat
-    return c2w_mat
 
 def rotmat2qvec(R):
     Rxx, Ryx, Rzx, Rxy, Ryy, Rzy, Rxz, Ryz, Rzz = R.flat
